@@ -14,7 +14,7 @@ def call(Map config) {
 
   def buildVersion = config.buildNumber
 
-  container('play28-builder') {
+  container('play28-builder-0') {
 
     stage('Audit Run Details') {
       echo "Project:   ${config.project}"

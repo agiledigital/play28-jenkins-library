@@ -40,12 +40,8 @@ def call(Map config) {
     }
 
     stage('Test') {
-      try {
       sbt ";project ${config.get('module', config.component)}; testOnly ** -- junitxml console"
-      junit "${config.baseDir}/${config.subPath}/target/test-reports/**/*.xml"
-      } catch (e) {
-        currentBuild.result = "UNSTABLE"
-      }
+      junit "${config.baseDir}/modules/${config.subPath}/target/test-reports/*.xml"
     }
   }
 

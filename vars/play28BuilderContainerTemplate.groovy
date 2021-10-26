@@ -5,7 +5,9 @@ def call(String index = '0') {
 			image: 'agiledigital/play28-builder',
 	    alwaysPullImage: true,
 			command: 'cat',
-			ttyEnabled: true
+			ttyEnabled: true,
+			runAsUser: '1000',
+			runAsGroup: '1000'
 		)
 	]
 }
