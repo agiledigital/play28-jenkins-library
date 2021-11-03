@@ -32,12 +32,12 @@ def call(Map config) {
 
     stage('Archive to Jenkins') {
       archiveArtifacts "${config.baseDir}/target/scala-2.13/dependency-check-report.html"
-      slackUploadFile filePath: "${config.baseDir}/target/scala-2.13/dependency-check-report.html", initialComment:  "${config.component} audit html file", channel: config.slackThead.threadId
+      slackUploadFile filePath: "${config.baseDir}/target/scala-2.13/dependency-check-report.html", initialComment:  "${config.project} audit html file", channel: config.slackThead.threadId
       
-      def tarName = "audits-sbt-${config.project}-${config.component}-${config.buildNumber}.tar.gz"
+      def tarName = "audits-sbt-${config.project}-${config.buildNumber}.tar.gz"
       sh "tar -czvf \"${tarName}\" `find ./ -name \"dependency-check-report.*\"`"
       junit "${config.baseDir}/${config.subPath}/target/**/*.xml"
-      slackUploadFile filePath: tarName, initialComment:  "${config.component} audit jsonl file:\"${tarName}\"", channel: config.slackThead.threadId
+      slackUploadFile filePath: tarName, initialComment:  "${config.project} audit jsonl file:\"${tarName}\"", channel: config.slackThead.threadId
       archiveArtifacts tarName
     }
   }
