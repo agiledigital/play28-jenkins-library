@@ -36,7 +36,7 @@ def call(Map config) {
       
       def tarName = "audits-sbt-${config.project}-${config.buildNumber}.tar.gz"
       sh "tar -czvf \"${tarName}\" `find ./ -name \"dependency-check-report.*\"`"
-      junit "${config.baseDir}/${config.subPath}/target/**/*.xml"
+
       slackUploadFile filePath: tarName, initialComment:  "${config.project} audit jsonl file:\"${tarName}\"", channel: config.slackThead.threadId
       archiveArtifacts tarName
     }
