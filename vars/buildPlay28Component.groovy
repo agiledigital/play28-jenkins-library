@@ -58,18 +58,6 @@ def call(Map config) {
         |# Insert the project.conf, environment.conf, etc into the deployable.
         |cp *.conf "${modulePath}/conf"
         |
-        |# Create the conf file that ties the application.conf and environment.conf together.
-        |echo 'include "application.conf"' > "${modulePath}/conf/combined.conf"
-        |echo 'include "environment.conf"' >> "${modulePath}/conf/combined.conf"
-        |echo 'include "topology.conf"' >> "${modulePath}/conf/combined.conf"
-        |
-        |# Allow the application.context variable to be overridden.
-        |echo 'play.http.context=/' >> "${modulePath}/conf/combined.conf"
-        |echo 'play.http.context=\${?APPLICATION_CONTEXT}' >> "${modulePath}/conf/combined.conf"
-        |
-        |# Allow cryto to be changed
-        |echo 'play.crypto.secret=\${?APPLICATION_SECRET}' >> "${modulePath}/conf/combined.conf"
-        |
         |cat "${modulePath}/conf/combined.conf"
         |
         |""".stripMargin()
