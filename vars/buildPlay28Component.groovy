@@ -67,8 +67,9 @@ def call(Map config) {
         |echo 'play.http.context=/' >> "${modulePath}/conf/combined.conf"
         |echo 'play.http.context=\${?APPLICATION_CONTEXT}' >> "${modulePath}/conf/combined.conf"
         |
-        |# Allow cryto to be changed
+        |# Allow crypto to be changed (using both the old and current keys)
         |echo 'play.crypto.secret=\${?APPLICATION_SECRET}' >> "${modulePath}/conf/combined.conf"
+        |echo 'play.http.secret.key=\${?APPLICATION_SECRET}' >> "${modulePath}/conf/combined.conf"
         |
         |cat "${modulePath}/conf/combined.conf"
         |
